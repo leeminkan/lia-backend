@@ -18,10 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@core-modules": ["core-modules"],
-      "@core-modules/*": ["core-modules/*"],
-      "@core-infrastructure": ["core-infrastructure"],
-      "@core-infrastructure/*": ["core-infrastructure/*"]
+      "@core-modules": ["src/core-modules"],
+      "@core-modules/*": ["src/core-modules/*"],
+      "@core-infrastructure": ["src/core-infrastructure"],
+      "@core-infrastructure/*": ["src/core-infrastructure/*"]
     }
   }
 }

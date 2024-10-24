@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { ExternalAppController } from './external-app.controller';
 import { ExternalAppService } from './external-app.service';
 
@@ -11,7 +12,9 @@ describe('ExternalAppController', () => {
       providers: [ExternalAppService],
     }).compile();
 
-    externalAppController = app.get<ExternalAppController>(ExternalAppController);
+    externalAppController = app.get<ExternalAppController>(
+      ExternalAppController,
+    );
   });
 
   describe('root', () => {
