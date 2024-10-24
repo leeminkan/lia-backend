@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  lia-db:
+    image: postgres:latest
+    container_name: lia-db-$APP_ENV
+    ports:
+      - ${DB_EXPOSE_PORT}:5432
+    environment:
+      - POSTGRES_USER=$DB_USERNAME
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - POSTGRES_DB=$DB_NAME
+    volumes:
+      - $POSTGRES_PATH/lia-${APP_ENV}:/var/lib/postgresql/data
+    networks:
+      - lia_network
+
+networks:
+  lia_network:
+    driver: 'bridge'
