@@ -1,8 +1,10 @@
 export abstract class BaseMapper<DomainEntity, InfrastructureEntity> {
-  abstract mapToORM(userEntity: Omit<DomainEntity, 'id'>): InfrastructureEntity;
+  abstract mapToORM(
+    employeeEntity: Omit<DomainEntity, 'id'>,
+  ): InfrastructureEntity;
 
   abstract mapToDomain(
-    userInfraEntity: InfrastructureEntity,
+    employeeInfraEntity: InfrastructureEntity,
     additionalFields?: Record<string, unknown>,
   ): DomainEntity;
 }

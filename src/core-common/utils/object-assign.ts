@@ -11,7 +11,10 @@ export function objectAssign(
   } = {};
 
   Object.keys(existingData).forEach((key) => {
-    if (typeof existingData[key] === 'object') {
+    if (
+      typeof existingData[key] === 'object' &&
+      !(existingData[key] instanceof Date)
+    ) {
       if (Array.isArray(existingData[key])) {
         listObject[key] = newData[key] as Array<unknown>;
       } else listObject[key] = newData[key] as { [key: string]: unknown };

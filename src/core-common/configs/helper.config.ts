@@ -1,6 +1,5 @@
 import { registerAs } from '@nestjs/config';
 import { IsNotEmpty, IsString } from 'class-validator';
-import ms from 'ms';
 
 import { validateConfig } from '@core-common/utils/validate-config';
 
@@ -20,7 +19,7 @@ export const registeredHelperConfig = registerAs<HelperConfig>('helper', () => {
     saltLength: 8,
     jwt: {
       secretKey: validatedValue.HELPER_DEFAULT_SECRET_KEY,
-      expirationTime: ms('1h'),
+      expirationTime: '1h',
     },
   } as HelperConfig;
 });
@@ -29,6 +28,6 @@ export type HelperConfig = {
   saltLength: number;
   jwt: {
     secretKey: string;
-    expirationTime: number;
+    expirationTime: string;
   };
 };
