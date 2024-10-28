@@ -6,10 +6,10 @@ import helmet from 'helmet';
 
 import { AllConfigType } from '@core-common/configs';
 
-import { AppModule } from './app.module';
+import { AppBModule } from './app-b.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppBModule);
   const logger = new Logger();
   const configService = app.get(ConfigService<AllConfigType>);
   const port = configService.getOrThrow('app.httpInternalPort', {
@@ -28,7 +28,7 @@ async function bootstrap() {
       crossOriginEmbedderPolicy: false, // Disable if not needed
     }),
   );
-  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  useContainer(app.select(AppBModule), { fallbackOnErrors: true });
   app.setGlobalPrefix('/api');
   app.enableVersioning({
     type: VersioningType.URI,
