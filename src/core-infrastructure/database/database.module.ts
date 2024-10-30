@@ -2,6 +2,14 @@ import { DynamicModule, Module, Provider } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type';
 
+import { CustomerSessionRepositoryImpl } from './persistence/customer-session/customer-session-impl.repository';
+import { CustomerSession as CustomerSessionInfrastructureEntity } from './persistence/customer-session/customer-session-typeorm.entity';
+import { CustomerSessionRepository } from './persistence/customer-session/customer-session.repository';
+import { CustomerRepositoryImpl } from './persistence/customer/customer-impl.repository';
+// !Note:  We specific import as below to avoid the error "circular dependency"
+// https://github.com/nestjs/nest/issues/3555#issuecomment-562470687
+import { Customer as CustomerInfrastructureEntity } from './persistence/customer/customer-typeorm.entity';
+import { CustomerRepository } from './persistence/customer/customer.repository';
 import { EmployeeSessionRepositoryImpl } from './persistence/employee-session/employee-session-impl.repository';
 import { EmployeeSession as EmployeeSessionInfrastructureEntity } from './persistence/employee-session/employee-session-typeorm.entity';
 import { EmployeeSessionRepository } from './persistence/employee-session/employee-session.repository';
@@ -17,6 +25,8 @@ export class DatabaseModule {
   static defaultEntities = [
     EmployeeInfrastructureEntity,
     EmployeeSessionInfrastructureEntity,
+    CustomerInfrastructureEntity,
+    CustomerSessionInfrastructureEntity,
   ];
 
   static forRootAsync(options: CoreDataTypeormConfig): DynamicModule {
@@ -47,6 +57,14 @@ export class DatabaseModule {
       [EmployeeSessionInfrastructureEntity.name]: {
         provide: EmployeeSessionRepository,
         useClass: EmployeeSessionRepositoryImpl,
+      },
+      [CustomerInfrastructureEntity.name]: {
+        provide: CustomerRepository,
+        useClass: CustomerRepositoryImpl,
+      },
+      [CustomerSessionInfrastructureEntity.name]: {
+        provide: CustomerSessionRepository,
+        useClass: CustomerSessionRepositoryImpl,
       },
     };
 
